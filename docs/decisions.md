@@ -1,6 +1,6 @@
 # Technical decisions
 
-Each decision records what we shipped, why, what else we considered, and why we rejected it. Alternatives are real options for this assignment
+Each decision records what we shipped, why, what else we considered, and why we rejected it. Alternatives are real options for this assignment, not straw men.
 
 ---
 
