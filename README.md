@@ -8,7 +8,7 @@ The work is organised around architecture, an API contract, a replaceable mock A
 
 ## Demo video
 
-Jam link: _add the recording URL here before submission._
+Jam: [Fourteen-Zones Assignment](https://jam.dev/c/919803b2-1992-45a2-bbfd-5bf855cb5866)
 
 The recording should show: catalog search and filters, a service detail, a successful booking, My Bookings, then the header **Mock** control for empty, server error, validation, and slot conflict.
 
