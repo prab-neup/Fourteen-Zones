@@ -1,32 +1,59 @@
-# React + TypeScript + Vite
+# Demo Marketplace — Customer Service Booking
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Production-style React module for the Demo Marketplace customer booking flow.
 
-Currently, two official plugins are available:
+**Customer → Service list → Service details → Date & time → Confirm → Confirmation → My bookings**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+The work is organised around architecture, an API contract, a replaceable mock API, and explicit loading / empty / error states. Visual design is secondary.
 
-## React Compiler
+## Demo video
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Jam link: _add the recording URL here before submission._
 
-## Expanding the Oxlint configuration
+The recording should show: catalog search and filters, a service detail, a successful booking, My Bookings, then the header **Mock** control for empty, server error, validation, and slot conflict.
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+## Stack
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+- React 19 + TypeScript + Vite
+- React Router
+- In-browser mock HTTP API (no backend)
+- Vitest + Testing Library
+
+## Quick start
+
+```bash
+npm install
+npm run dev
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+Open [http://localhost:5173](http://localhost:5173). The mock API starts with the app. Full install, env, and test notes: [docs/setup.md](docs/setup.md).
+
+```bash
+npm test
+```
+
+## Documentation
+
+| Doc | Contents |
+|---|---|
+| [docs/architecture.md](docs/architecture.md) | Layers, folders, features, state, errors |
+| [docs/api-contract.md](docs/api-contract.md) | Endpoints, bodies, status codes, empty/error behaviour |
+| [docs/decisions.md](docs/decisions.md) | What we chose, alternatives, why not |
+| [docs/setup.md](docs/setup.md) | Prerequisites, env, run app, run mock, run tests |
+
+## How the frontend talks to data
+
+Screens do not own arrays of services or bookings. They call `getServices`, `getService`, `getServiceAvailability`, `getCustomers`, `createBooking`, `getBookings`, and `getBooking`. Those functions use an `HttpClient`. In mock mode the client is an in-memory router; in `http` mode it is `fetch`.
+
+## Project layout
+
+```
+src/
+├── api/client/      HttpClient + ApiError + mock/fetch
+├── api/services/    Application API functions
+├── api/mock/        Fake backend, store, handlers
+├── features/        services · booking · bookings
+├── components/      Layout and shared states
+├── hooks/           Shared hooks
+└── types/           Shared types
+```
